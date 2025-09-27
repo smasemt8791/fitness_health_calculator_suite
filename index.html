@@ -1,0 +1,1407 @@
+<!doctype html>
+<html lang="en" class="antialiased transition-colors duration-300">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fitness & Health Calculator Suite</title>
+  
+  <!-- PWA Meta Tags -->
+  <meta name="theme-color" content="#4f46e5" />
+  <meta name="description" content="Comprehensive fitness and health calculator suite with 12 calculators" />
+  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiRml0bmVzcyAmIEhlYWx0aCBDYWxjdWxhdG9yIiwic2hvcnRfbmFtZSI6IkZpdG5lc3NDYWxjIiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmMWY1ZjkiLCJ0aGVtZV9jb2xvciI6IiM0ZjQ2ZTUiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCNGJXeHVjejBpYUhSMGNEb3ZMM2QzZHk1M00zUXZNakF3TUM5emRtY2lJSGRwWkhSb1BTSXhNakFpSUdobGFXZG9kRDBpTVRJd0lpQjJhV1YzUW05NFBTSXdJREFnTVRJd0lERXlNQ0krUEhKbFkzUWdkMmxrZEdnOUlqRXlNQ0lnYUdWcFoyaDBQU0l4TWpBaUlHWnBiR3c5SWlNMFpqUTJaVFVpTHo0OGRHVjRkQ0I0UFNJMk1DSWdlVDBpTkRBaUlHWnBiR3c5SWlObVptWWlJR1p2Ym5RdFptRnRhV3g1UFNKQmNtbGhiQ3dnYzJGdWN5MXpaWEpwWmlJZ1ptOXVkQzF6YVRwbFBTSXlOQ0IyYjIxa0lHWnZiblF0ZDJWcFoyaDBQU0kyTURBaVBrWnBkRzVsYzNNOEwzUmxlSFErUEM5emRtYysifSx7InNyYyI6ImRhdGE6aW1hZ2Uvc3ZnK3htbDtiYXNlNjQsUEhOMlp5QjRiV3h1Y3owdVkyOXRJSGRwWkhSb1BTSTFNVElpSUdobGFXZG9kRDBpTlRFeUlpQjJhV1YzUW05NFBTSXdJREFnTlRFeUlEVXhNaUkrUEhKbFkzUWdkMmxrZEdnOUlqVXhNaUlnYUdWcFoyaDBQU0kxTVRJaUlHWnBiR3c5SWlNMFpqUTJaVFVpTHo0OGRHVjRkQ0I0UFNJeU5UWWlJSGs5SWpFMk1DSWdabWxzYkQwaVkzVnljbVZ1ZEVOdmJHOXlJaUJtYjI1MExXWmhiV2xzZVQwaVFYSnBZV3dzSUhOaGJuTXRjMlZ5YVdZaUlHWnZiblF0YzJsNlpUMGlORGdpSUdadmJuUXRkMlZwWjJoMFBTSTJNREFpUGtacGRHNWxjM004TDNSbGVIUStQQzl6ZG1jKyIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcrY21sIn1dfQ==" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTIwIDEyMCI+PHJlY3Qgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIGZpbGw9IiM0ZjQ2ZTUiLz48dGV4dCB4PSI2MCIgeT0iNDAiIGZpbGw9IiNmZmYiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyNCB2b21kIGZvbnQtd2VpZ2h0PSI2MDAiPkZpdG5lc3M8L3RleHQ+PC9zdmc+" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          animation: {
+            'fade-in': 'fadeIn 0.3s ease-out',
+            'slide-up': 'slideUp 0.3s ease-out',
+            'bounce-in': 'bounceIn 0.5s ease-out',
+            'pulse-slow': 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' }
+            },
+            bounceIn: {
+              '0%': { transform: 'scale(0.3)', opacity: '0' },
+              '50%': { transform: 'scale(1.05)' },
+              '70%': { transform: 'scale(0.9)' },
+              '100%': { transform: 'scale(1)', opacity: '1' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    html,body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial} 
+    html[dir="rtl"],html[dir="rtl"] body{font-family:Amiri,serif}
+    
+    /* Dark mode variables */
+    :root {
+      --card: #ffffffcc;
+      --card-dark: #1f2937cc;
+    }
+    
+    .dark {
+      --card: var(--card-dark);
+    }
+    
+    /* Mobile sidebar overlay */
+    #sidebar.mobile-open {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100vh;
+      z-index: 50;
+      overflow-y: auto;
+      transform: translateX(0);
+      transition: transform 0.3s ease-in-out;
+    }
+    
+    html[dir="rtl"] #sidebar.mobile-open {
+      left: auto;
+      right: 0;
+    }
+    
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 40;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .overlay.active {
+      display: block;
+    }
+    
+    /* Smooth transitions */
+    * {
+      transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    
+    /* Result animations */
+    .result-enter {
+      animation: bounceIn 0.5s ease-out;
+    }
+    
+    /* Button hover effects */
+    .btn-hover {
+      transform: scale(1);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-hover:hover {
+      transform: scale(1.02);
+      box-shadow: 0 8px 25px rgba(79, 70, 229, 0.25);
+    }
+    
+    /* Loading animation */
+    .calculating {
+      position: relative;
+      overflow: hidden;
+    }
+    .calculating::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      animation: shimmer 1.5s infinite;
+    }
+    
+    @keyframes shimmer {
+      100% { left: 100%; }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 min-h-screen text-slate-800 dark:text-slate-100 transition-colors duration-500">
+  <!-- Mobile overlay -->
+  <div id="overlay" class="overlay" onclick="closeMobileSidebar()"></div>
+
+  <div class="max-w-6xl mx-auto p-4">
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-6 animate-fade-in">
+      <div>
+        <h1 class="text-xl md:text-3xl font-bold flex items-center gap-3 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <span class="text-2xl md:text-4xl">🏃‍♂️</span>
+          <span id="appTitle">Fitness & Health Calculator Suite</span>
+        </h1>
+        <p class="text-xs md:text-sm text-slate-600 dark:text-slate-400 mt-1" id="appSubtitle">
+          Single-file PWA — 12 calculators · Metric / Imperial · Saved results
+        </p>
+      </div>
+      <div class="flex items-center gap-2">
+        <!-- Language Toggle -->
+        <button id="langToggle" class="p-2 md:px-3 md:py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-sm md:text-base btn-hover">
+          <span id="langIcon">🇺🇸</span>
+        </button>
+        
+        <!-- Dark Mode Toggle -->
+        <button id="themeToggle" class="p-2 md:px-3 md:py-2 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 text-sm md:text-base btn-hover">
+          <span id="themeIcon">🌙</span>
+        </button>
+        
+        <!-- Menu Toggle -->
+        <button id="sidebarToggle" class="px-3 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base btn-hover">
+          <span id="menuText">☰ Menu</span>
+        </button>
+        
+        <!-- Install Button -->
+        <button id="installBtn" class="hidden px-3 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 text-sm md:text-base btn-hover">
+          <span id="installText">📱 Install</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="grid grid-cols-1 lg:grid-cols-4 gap-6 animate-slide-up">
+      <!-- Sidebar -->
+      <nav id="sidebar" class="lg:col-span-1 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-4 rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-600/50 lg:sticky top-4 h-fit hidden lg:block">
+        <!-- Unit Selection -->
+        <div class="mb-4 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-gray-700 dark:to-gray-600 rounded-xl">
+          <h3 class="font-semibold mb-3 text-sm" id="unitsTitle">Units</h3>
+          <label class="flex items-center gap-3 mb-2 cursor-pointer group">
+            <input type="radio" name="unit" id="unitMetric" checked class="w-4 h-4 text-indigo-600 transition-colors" />
+            <span class="text-sm group-hover:text-indigo-600 transition-colors" id="metricLabel">Metric</span>
+          </label>
+          <label class="flex items-center gap-3 cursor-pointer group">
+            <input type="radio" name="unit" id="unitImperial" class="w-4 h-4 text-indigo-600 transition-colors" />
+            <span class="text-sm group-hover:text-indigo-600 transition-colors" id="imperialLabel">Imperial</span>
+          </label>
+        </div>
+
+        <hr class="my-4 border-gray-200 dark:border-gray-600">
+
+        <!-- Calculator Menu -->
+        <ul id="calculatorList" class="space-y-2">
+          <!-- Menu injected by JS -->
+        </ul>
+
+        <hr class="my-4 border-gray-200 dark:border-gray-600">
+        <div class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed" id="footerText">
+          Saved values persist locally. Service worker available on HTTPS / localhost.
+        </div>
+      </nav>
+
+      <!-- Calculator Content -->
+      <section id="content" class="lg:col-span-3 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-6 rounded-2xl shadow-xl border border-gray-200/50 dark:border-gray-600/50 min-h-[400px]">
+        <!-- Active calculator injected here -->
+        <div class="flex items-center justify-center h-64">
+          <div class="animate-pulse-slow text-6xl">🏃‍♂️</div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-8 text-center text-sm text-slate-500 dark:text-slate-400 animate-fade-in">
+      <p id="copyrightText">© 2025 MAS Company. All rights reserved. Built with care for health and fitness enthusiasts.</p>
+    </footer>
+  </div>
+
+  <script>
+  /* ===================== App Data & Config ===================== */
+  
+  // Language support
+  const translations = {
+    en: {
+      appTitle: 'Fitness & Health Calculator Suite',
+      appSubtitle: 'Single-file PWA — 12 calculators · Metric / Imperial · Saved results',
+      menuText: '☰ Menu',
+      installText: '📱 Install',
+      unitsTitle: 'Units',
+      metricLabel: 'Metric',
+      imperialLabel: 'Imperial',
+      footerText: 'Saved values persist locally. Service worker available on HTTPS / localhost.',
+      copyrightText: '© 2025 MAS Company. All rights reserved. Built with care for health and fitness enthusiasts.',
+      calculateBtn: 'Calculate',
+      requiredError: 'Enter valid numbers',
+      results: 'Results',
+      
+      // Calculator names
+      calculators: [
+        {id:'bmi', title:'BMI Calculator', emoji:'⚖️', description:'Body Mass Index'},
+        {id:'calorie', title:'Calorie Calculator', emoji:'🍽️', description:'BMR + Activity Level'},
+        {id:'bodyfat_navy', title:'Body Fat (U.S. Navy)', emoji:'🧮', description:'Navy Method'},
+        {id:'bmr', title:'BMR Calculator', emoji:'🔥', description:'Basal Metabolic Rate'},
+        {id:'ideal', title:'Ideal Weight', emoji:'📏', description:'Devine Formula'},
+        {id:'pace', title:'Pace Calculator', emoji:'⏱️', description:'Running Pace'},
+        {id:'armybf', title:'Army Body Fat', emoji:'🎖️', description:'Army Method'},
+        {id:'lbm_boer', title:'Lean Body Mass', emoji:'💪', description:'Boer Formula'},
+        {id:'healthy', title:'Healthy Weight Range', emoji:'🟢', description:'BMI 18.5–24.9'},
+        {id:'calburn', title:'Calories Burned', emoji:'🔥', description:'Activity Based'},
+        {id:'onerep', title:'One-Rep Max', emoji:'🏋️', description:'Strength Estimate'},
+        {id:'thr', title:'Target Heart Rate', emoji:'❤️', description:'Training Zones'}
+      ],
+      
+      // Form labels
+      weight: 'Weight',
+      height: 'Height',
+      age: 'Age',
+      gender: 'Gender',
+      male: 'Male',
+      female: 'Female',
+      activity: 'Activity Level',
+      waist: 'Waist',
+      neck: 'Neck',
+      hip: 'Hip',
+      distance: 'Distance',
+      time: 'Time',
+      reps: 'Repetitions',
+      weightLifted: 'Weight Lifted',
+      exerciseType: 'Exercise Type',
+      duration: 'Duration',
+      
+      // Activity levels
+      sedentary: 'Sedentary (little/no exercise)',
+      light: 'Light (light exercise 1-3 days/week)',
+      moderate: 'Moderate (moderate exercise 3-5 days/week)',
+      active: 'Active (hard exercise 6-7 days/week)',
+      very: 'Very Active (very hard exercise, physical job)',
+      
+      // BMI categories
+      underweight: 'Underweight',
+      normal: 'Normal weight',
+      overweight: 'Overweight',
+      obese: 'Obese',
+      
+      // Units
+      kg: 'kg',
+      lbs: 'lbs',
+      cm: 'cm',
+      inches: 'inches',
+      years: 'years',
+      minutes: 'minutes',
+      seconds: 'seconds'
+    },
+    
+    ar: {
+      appTitle: 'حاسبة اللياقة البدنية والصحة',
+      appSubtitle: 'تطبيق ويب تقدمي — ١٢ حاسبة · متري / إمبراطوري · نتائج محفوظة',
+      menuText: '☰ القائمة',
+      installText: '📱 تثبيت',
+      unitsTitle: 'الوحدات',
+      metricLabel: 'متري',
+      imperialLabel: 'إمبراطوري',
+      footerText: 'القيم المحفوظة تبقى محلياً. خدمة العامل متاحة على HTTPS / localhost.',
+      copyrightText: '© ٢٠٢٥ شركة MAS. جميع الحقوق محفوظة. صُنع بعناية لعشاق الصحة واللياقة البدنية.',
+      calculateBtn: 'احسب',
+      requiredError: 'أدخل أرقام صحيحة',
+      results: 'النتائج',
+      
+      // Calculator names
+      calculators: [
+        {id:'bmi', title:'حاسبة مؤشر كتلة الجسم', emoji:'⚖️', description:'مؤشر كتلة الجسم'},
+        {id:'calorie', title:'حاسبة السعرات الحرارية', emoji:'🍽️', description:'معدل الأيض + النشاط'},
+        {id:'bodyfat_navy', title:'دهون الجسم (البحرية الأمريكية)', emoji:'🧮', description:'طريقة البحرية'},
+        {id:'bmr', title:'حاسبة معدل الأيض الأساسي', emoji:'🔥', description:'معدل الأيض الأساسي'},
+        {id:'ideal', title:'الوزن المثالي', emoji:'📏', description:'معادلة ديفين'},
+        {id:'pace', title:'حاسبة السرعة', emoji:'⏱️', description:'سرعة الجري'},
+        {id:'armybf', title:'دهون الجسم للجيش', emoji:'🎖️', description:'طريقة الجيش'},
+        {id:'lbm_boer', title:'كتلة الجسم النحيف', emoji:'💪', description:'معادلة بوير'},
+        {id:'healthy', title:'نطاق الوزن الصحي', emoji:'🟢', description:'مؤشر كتلة الجسم ١٨.٥–٢٤.٩'},
+        {id:'calburn', title:'السعرات المحروقة', emoji:'🔥', description:'حسب النشاط'},
+        {id:'onerep', title:'أقصى تكرار واحد', emoji:'🏋️', description:'تقدير القوة'},
+        {id:'thr', title:'معدل نبضات القلب المستهدف', emoji:'❤️', description:'مناطق التدريب'}
+      ],
+      
+      // Form labels
+      weight: 'الوزن',
+      height: 'الطول',
+      age: 'العمر',
+      gender: 'الجنس',
+      male: 'ذكر',
+      female: 'أنثى',
+      activity: 'مستوى النشاط',
+      waist: 'الخصر',
+      neck: 'الرقبة',
+      hip: 'الورك',
+      distance: 'المسافة',
+      time: 'الوقت',
+      reps: 'التكرارات',
+      weightLifted: 'الوزن المرفوع',
+      exerciseType: 'نوع التمرين',
+      duration: 'المدة',
+      
+      // Activity levels
+      sedentary: 'خامل (لا يوجد تمرين أو قليل)',
+      light: 'خفيف (تمرين خفيف ١-٣ أيام/أسبوع)',
+      moderate: 'متوسط (تمرين متوسط ٣-٥ أيام/أسبوع)',
+      active: 'نشط (تمرين شاق ٦-٧ أيام/أسبوع)',
+      very: 'نشط جداً (تمرين شاق جداً، عمل بدني)',
+      
+      // BMI categories
+      underweight: 'نحيف',
+      normal: 'وزن طبيعي',
+      overweight: 'زيادة في الوزن',
+      obese: 'سمنة',
+      
+      // Units
+      kg: 'كغ',
+      lbs: 'باوند',
+      cm: 'سم',
+      inches: 'بوصة',
+      years: 'سنة',
+      minutes: 'دقيقة',
+      seconds: 'ثانية'
+    }
+  };
+
+  const activityFactors = {
+    'sedentary': 1.2,
+    'light': 1.375,
+    'moderate': 1.55,
+    'active': 1.725,
+    'very': 1.9
+  };
+
+  const metTable = {
+    'Running (8 km/h)': 8.3,
+    'Walking (5 km/h)': 3.5,
+    'Cycling (moderate)': 7.5,
+    'Swimming (moderate)': 6.0,
+    'Yoga': 2.5,
+    'Housework': 2.8,
+    'Weightlifting': 3.0,
+    'Dancing': 4.8
+  };
+
+  /* ===================== State Management ===================== */
+  let currentLang = loadState('language') || 'en';
+  let currentTheme = loadState('theme') || 'light';
+  let currentId = loadState('lastId') || 'bmi';
+  let unit = loadState('unit') || 'metric';
+
+  /* ===================== Utilities ===================== */
+  function $(s,ctx=document){return ctx.querySelector(s)}
+  function $all(s,ctx=document){return Array.from(ctx.querySelectorAll(s))}
+  function fmt(n,dec=2){return Number.isFinite(n)?Number(n.toFixed(dec)):''}
+  function requiredNumber(v){const n=parseFloat(v); return (Number.isFinite(n) && n>=0)?n:NaN}
+  function saveState(key,value){localStorage.setItem('fh.'+key, JSON.stringify(value))}
+  function loadState(key,def=null){try{const v=localStorage.getItem('fh.'+key); return v?JSON.parse(v):def}catch(e){return def}}
+  
+  function t(key) {
+    return translations[currentLang][key] || translations.en[key] || key;
+  }
+
+  /* ===================== Theme Management ===================== */
+  function initTheme() {
+    if (currentTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+      $('#themeIcon').textContent = '☀️';
+    } else {
+      document.documentElement.classList.remove('dark');
+      $('#themeIcon').textContent = '🌙';
+    }
+  }
+
+  function toggleTheme() {
+    currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+    saveState('theme', currentTheme);
+    initTheme();
+  }
+
+  /* ===================== Language Management ===================== */
+  function initLanguage() {
+    if (currentLang === 'ar') {
+      document.documentElement.setAttribute('dir', 'rtl');
+      $('#langIcon').textContent = '🇸🇦';
+    } else {
+      document.documentElement.setAttribute('dir', 'ltr');
+      $('#langIcon').textContent = '🇺🇸';
+    }
+    updateTexts();
+  }
+
+  function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'ar' : 'en';
+    saveState('language', currentLang);
+    initLanguage();
+    renderActive(); // Re-render to apply language changes
+  }
+
+  function updateTexts() {
+    $('#appTitle').textContent = t('appTitle');
+    $('#appSubtitle').textContent = t('appSubtitle');
+    $('#menuText').textContent = t('menuText');
+    $('#installText').textContent = t('installText');
+    $('#unitsTitle').textContent = t('unitsTitle');
+    $('#metricLabel').textContent = t('metricLabel');
+    $('#imperialLabel').textContent = t('imperialLabel');
+    $('#footerText').textContent = t('footerText');
+    $('#copyrightText').textContent = t('copyrightText');
+  }
+
+  /* ===================== PWA Installation ===================== */
+  let deferredPrompt;
+  
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    $('#installBtn').classList.remove('hidden');
+  });
+
+  $('#installBtn').addEventListener('click', async () => {
+    if (!deferredPrompt) return;
+    
+    const result = await deferredPrompt.prompt();
+    deferredPrompt = null;
+    $('#installBtn').classList.add('hidden');
+  });
+
+  /* ===================== Mobile Sidebar Functions ===================== */
+  function toggleMobileSidebar() {
+    const sidebar = $('#sidebar');
+    const overlay = $('#overlay');
+    
+    if (window.innerWidth < 1024) { // Mobile/tablet view
+      sidebar.classList.toggle('mobile-open');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = sidebar.classList.contains('mobile-open') ? 'hidden' : '';
+    } else { // Desktop view
+      sidebar.classList.toggle('hidden');
+    }
+  }
+
+  function closeMobileSidebar() {
+    const sidebar = $('#sidebar');
+    const overlay = $('#overlay');
+    
+    sidebar.classList.remove('mobile-open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* ===================== Menu & Units ===================== */
+  function initMenu() {
+    const menu = $('#calculatorList');
+    menu.innerHTML = '';
+    
+    const calculators = t('calculators');
+    calculators.forEach((c,i)=>{
+      const li = document.createElement('li');
+      li.innerHTML = `<button data-id="${c.id}" class="w-full text-left px-4 py-3 rounded-xl hover:bg-gradient-to-r hover:from-indigo-50 hover:to-purple-50 dark:hover:from-gray-700 dark:hover:to-gray-600 transition-all duration-300 flex items-center gap-3 group btn-hover"> 
+        <span class="text-xl group-hover:scale-110 transition-transform duration-300">${c.emoji}</span> 
+        <div class="flex-1">
+          <div class="font-semibold text-sm md:text-base group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">${c.title}</div>
+          <div class="text-xs text-slate-500 dark:text-slate-400">${c.description}</div>
+        </div>
+      </button>`;
+      
+      const btn = li.querySelector('button');
+      btn.addEventListener('click', function() {
+        if (window.innerWidth < 1024) {
+          closeMobileSidebar();
+        }
+        currentId = this.dataset.id;
+        saveState('lastId', currentId);
+        renderActive();
+        
+        // Add active state
+        $all('#calculatorList button').forEach(b => b.classList.remove('bg-gradient-to-r', 'from-indigo-100', 'to-purple-100', 'dark:from-gray-600', 'dark:to-gray-500'));
+        this.classList.add('bg-gradient-to-r', 'from-indigo-100', 'to-purple-100', 'dark:from-gray-600', 'dark:to-gray-500');
+      });
+      
+      menu.appendChild(li);
+    });
+  }
+
+  function setUnit(u){
+    unit=u; 
+    saveState('unit',u); 
+    document.getElementById('unitMetric').checked = (u==='metric'); 
+    document.getElementById('unitImperial').checked = (u==='imperial'); 
+    renderActive();
+  }
+
+  /* ===================== Form Helpers ===================== */
+  function numberInput(name, label, placeholder='', unit=''){
+    return `<div class="space-y-1 animate-fade-in">
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        <div class="flex justify-between items-center">
+          <span>${label} ${unit ? `(${unit})` : ''}</span>
+          <span id="${name}Err" class="text-xs text-red-500 hidden">❌ ${t('requiredError')}</span>
+        </div>
+        <input 
+          inputmode="decimal" 
+          id="${name}" 
+          placeholder="${placeholder}" 
+          class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-xl px-4 py-3 mt-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 text-base placeholder-gray-400 dark:placeholder-gray-500" 
+        />
+      </label>
+    </div>`;
+  }
+
+  function selectInput(name, label, options) {
+    const optionsHtml = options.map(opt => 
+      `<option value="${opt.value}"${opt.selected ? ' selected' : ''}>${opt.label}</option>`
+    ).join('');
+    
+    return `<div class="space-y-1 animate-fade-in">
+      <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+        ${label}
+        <select 
+          id="${name}" 
+          class="w-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded-xl px-4 py-3 mt-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all duration-300 text-base"
+        >
+          ${optionsHtml}
+        </select>
+      </label>
+    </div>`;
+  }
+
+  function radioInput(name, label, options) {
+    const optionsHtml = options.map(opt => 
+      `<label class="flex items-center gap-3 cursor-pointer group">
+        <input type="radio" name="${name}" value="${opt.value}"${opt.selected ? ' checked' : ''} class="w-4 h-4 text-indigo-600 transition-colors" />
+        <span class="text-sm group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">${opt.label}</span>
+      </label>`
+    ).join('');
+    
+    return `<div class="space-y-3 animate-fade-in">
+      <div class="text-sm font-medium text-gray-700 dark:text-gray-300">${label}</div>
+      <div class="space-y-2">${optionsHtml}</div>
+    </div>`;
+  }
+
+  function createButton(text, onClick, variant = 'primary') {
+    const btn = document.createElement('button');
+    btn.textContent = text;
+    
+    if (variant === 'primary') {
+      btn.className = 'w-full md:w-auto px-6 py-3 bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 text-base font-semibold btn-hover';
+    }
+    
+    btn.addEventListener('click', (e) => {
+      btn.classList.add('calculating');
+      setTimeout(() => {
+        btn.classList.remove('calculating');
+        onClick(e);
+      }, 500);
+    });
+    
+    return btn;
+  }
+
+  function showResult(content, type = 'success') {
+    const resWrap = $('#resultWrap');
+    const bgColor = type === 'success' ? 'from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20' : 
+                   type === 'warning' ? 'from-yellow-50 to-orange-50 dark:from-yellow-900/20 dark:to-orange-900/20' : 
+                   'from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20';
+    
+    resWrap.innerHTML = `<div class="bg-gradient-to-r ${bgColor} border border-gray-200 dark:border-gray-600 p-6 rounded-2xl shadow-lg mt-6 result-enter">
+      <h3 class="font-bold text-lg mb-4 flex items-center gap-2">
+        <span class="text-xl">${type === 'success' ? '✅' : type === 'warning' ? '⚠️' : '❌'}</span>
+        ${t('results')}
+      </h3>
+      ${content}
+    </div>`;
+  }
+
+  /* ===================== Calculator Implementations ===================== */
+  function renderForm(id, wrap, resWrap){
+    wrap.innerHTML = '';
+    resWrap.innerHTML = '';
+    
+    const calculators = t('calculators');
+    const calc = calculators.find(c => c.id === id);
+    
+    if (!calc) return;
+
+    const formContainer = document.createElement('div');
+    formContainer.className = 'space-y-4';
+
+    if(id === 'bmi') {
+      const weightUnit = unit === 'metric' ? t('kg') : t('lbs');
+      const heightUnit = unit === 'metric' ? t('cm') : t('inches');
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('weight', t('weight'), '', weightUnit)}
+          ${numberInput('height', t('height'), '', heightUnit)}
+        </div>
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} BMI`, () => {
+        const w = requiredNumber($('#weight').value);
+        let h = requiredNumber($('#height').value);
+        
+        if(!w || !h) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Convert units if imperial
+        let weight = w;
+        if (unit === 'imperial') {
+          weight = w * 0.453592; // lbs to kg
+          h = h * 2.54; // inches to cm
+        }
+        
+        h = h / 100; // cm to meters
+        const bmi = weight / (h * h);
+        
+        let category = '';
+        let categoryClass = '';
+        if (bmi < 18.5) {
+          category = t('underweight');
+          categoryClass = 'text-blue-600';
+        } else if (bmi < 25) {
+          category = t('normal');
+          categoryClass = 'text-green-600';
+        } else if (bmi < 30) {
+          category = t('overweight');
+          categoryClass = 'text-yellow-600';
+        } else {
+          category = t('obese');
+          categoryClass = 'text-red-600';
+        }
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${fmt(bmi)}</div>
+            <div class="text-lg ${categoryClass} font-semibold">${category}</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'calorie') {
+      const weightUnit = unit === 'metric' ? t('kg') : t('lbs');
+      const heightUnit = unit === 'metric' ? t('cm') : t('inches');
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('weight', t('weight'), '', weightUnit)}
+          ${numberInput('height', t('height'), '', heightUnit)}
+          ${numberInput('age', t('age'), '', t('years'))}
+        </div>
+        ${radioInput('gender', t('gender'), [
+          {value: 'male', label: t('male'), selected: true},
+          {value: 'female', label: t('female')}
+        ])}
+        ${selectInput('activity', t('activity'), [
+          {value: 'sedentary', label: t('sedentary'), selected: true},
+          {value: 'light', label: t('light')},
+          {value: 'moderate', label: t('moderate')},
+          {value: 'active', label: t('active')},
+          {value: 'very', label: t('very')}
+        ])}
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} ${t('calculators').find(c=>c.id==='calorie').title}`, () => {
+        const w = requiredNumber($('#weight').value);
+        let h = requiredNumber($('#height').value);
+        const a = requiredNumber($('#age').value);
+        const gender = $('input[name="gender"]:checked').value;
+        const activityLevel = $('#activity').value;
+        
+        if(!w || !h || !a) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Convert units if imperial
+        let weight = w;
+        let height = h;
+        if (unit === 'imperial') {
+          weight = w * 0.453592; // lbs to kg
+          height = h * 2.54; // inches to cm
+        }
+        
+        // Mifflin-St Jeor Equation
+        let bmr;
+        if (gender === 'male') {
+          bmr = (10 * weight) + (6.25 * height) - (5 * a) + 5;
+        } else {
+          bmr = (10 * weight) + (6.25 * height) - (5 * a) - 161;
+        }
+        
+        const tdee = bmr * activityFactors[activityLevel];
+        
+        showResult(`
+          <div class="space-y-3">
+            <div class="text-center">
+              <div class="text-2xl font-bold text-indigo-600">${fmt(bmr)} ${t('calculators').find(c=>c.id==='calorie').description.split(' ')[0]}</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Basal Metabolic Rate</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-green-600">${fmt(tdee)} calories/day</div>
+              <div class="text-sm text-gray-600 dark:text-gray-400">Total Daily Energy Expenditure</div>
+            </div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'bodyfat_navy') {
+      const unit1 = unit === 'metric' ? t('cm') : t('inches');
+      
+      formContainer.innerHTML = `
+        ${radioInput('gender', t('gender'), [
+          {value: 'male', label: t('male'), selected: true},
+          {value: 'female', label: t('female')}
+        ])}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('waist', t('waist'), '', unit1)}
+          ${numberInput('neck', t('neck'), '', unit1)}
+        </div>
+        <div id="hipField" class="hidden">
+          ${numberInput('hip', t('hip'), '', unit1)}
+        </div>
+      `;
+      
+      // Show hip field for females
+      $all('input[name="gender"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          const hipField = $('#hipField');
+          if (radio.value === 'female' && radio.checked) {
+            hipField.classList.remove('hidden');
+          } else {
+            hipField.classList.add('hidden');
+          }
+        });
+      });
+      
+      const btn = createButton(`${t('calculateBtn')} Body Fat %`, () => {
+        const waist = requiredNumber($('#waist').value);
+        const neck = requiredNumber($('#neck').value);
+        const gender = $('input[name="gender"]:checked').value;
+        let hip = 0;
+        
+        if (gender === 'female') {
+          hip = requiredNumber($('#hip').value);
+          if (!hip) {
+            alert(t('requiredError'));
+            return;
+          }
+        }
+        
+        if(!waist || !neck) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Convert to inches if metric
+        let w = waist, n = neck, h = hip;
+        if (unit === 'metric') {
+          w = waist / 2.54;
+          n = neck / 2.54;
+          if (hip) h = hip / 2.54;
+        }
+        
+        let bodyFat;
+        if (gender === 'male') {
+          bodyFat = 495 / (1.0324 - 0.19077 * Math.log10(w - n) + 0.15456 * Math.log10(170)) - 450; // Assuming 170cm height
+        } else {
+          bodyFat = 495 / (1.29579 - 0.35004 * Math.log10(w + h - n) + 0.22100 * Math.log10(170)) - 450;
+        }
+        
+        let category = '';
+        let categoryClass = '';
+        if (gender === 'male') {
+          if (bodyFat < 6) { category = 'Essential Fat'; categoryClass = 'text-blue-600'; }
+          else if (bodyFat < 14) { category = 'Athletic'; categoryClass = 'text-green-600'; }
+          else if (bodyFat < 18) { category = 'Fitness'; categoryClass = 'text-green-500'; }
+          else if (bodyFat < 25) { category = 'Average'; categoryClass = 'text-yellow-600'; }
+          else { category = 'Obese'; categoryClass = 'text-red-600'; }
+        } else {
+          if (bodyFat < 14) { category = 'Essential Fat'; categoryClass = 'text-blue-600'; }
+          else if (bodyFat < 21) { category = 'Athletic'; categoryClass = 'text-green-600'; }
+          else if (bodyFat < 25) { category = 'Fitness'; categoryClass = 'text-green-500'; }
+          else if (bodyFat < 32) { category = 'Average'; categoryClass = 'text-yellow-600'; }
+          else { category = 'Obese'; categoryClass = 'text-red-600'; }
+        }
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${fmt(bodyFat)}%</div>
+            <div class="text-lg ${categoryClass} font-semibold">${category}</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'bmr') {
+      const weightUnit = unit === 'metric' ? t('kg') : t('lbs');
+      const heightUnit = unit === 'metric' ? t('cm') : t('inches');
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('weight', t('weight'), '', weightUnit)}
+          ${numberInput('height', t('height'), '', heightUnit)}
+          ${numberInput('age', t('age'), '', t('years'))}
+        </div>
+        ${radioInput('gender', t('gender'), [
+          {value: 'male', label: t('male'), selected: true},
+          {value: 'female', label: t('female')}
+        ])}
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} BMR`, () => {
+        const w = requiredNumber($('#weight').value);
+        let h = requiredNumber($('#height').value);
+        const a = requiredNumber($('#age').value);
+        const gender = $('input[name="gender"]:checked').value;
+        
+        if(!w || !h || !a) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Convert units if imperial
+        let weight = w;
+        let height = h;
+        if (unit === 'imperial') {
+          weight = w * 0.453592;
+          height = h * 2.54;
+        }
+        
+        let bmr;
+        if (gender === 'male') {
+          bmr = (10 * weight) + (6.25 * height) - (5 * a) + 5;
+        } else {
+          bmr = (10 * weight) + (6.25 * height) - (5 * a) - 161;
+        }
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${fmt(bmr)}</div>
+            <div class="text-lg text-gray-600 dark:text-gray-400">calories/day</div>
+            <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">Basal Metabolic Rate (Mifflin-St Jeor)</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'ideal') {
+      const heightUnit = unit === 'metric' ? t('cm') : t('inches');
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('height', t('height'), '', heightUnit)}
+        </div>
+        ${radioInput('gender', t('gender'), [
+          {value: 'male', label: t('male'), selected: true},
+          {value: 'female', label: t('female')}
+        ])}
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} ${t('calculators').find(c=>c.id==='ideal').title}`, () => {
+        let h = requiredNumber($('#height').value);
+        const gender = $('input[name="gender"]:checked').value;
+        
+        if(!h) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Convert to inches if metric
+        let height = h;
+        if (unit === 'metric') {
+          height = h / 2.54;
+        }
+        
+        // Devine Formula
+        let idealWeight;
+        if (gender === 'male') {
+          idealWeight = 50 + 2.3 * (height - 60);
+        } else {
+          idealWeight = 45.5 + 2.3 * (height - 60);
+        }
+        
+        // Convert back if metric
+        if (unit === 'metric') {
+          idealWeight = idealWeight * 0.453592; // lbs to kg
+        }
+        
+        const weightUnit = unit === 'metric' ? t('kg') : t('lbs');
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${fmt(idealWeight)}</div>
+            <div class="text-lg text-gray-600 dark:text-gray-400">${weightUnit}</div>
+            <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">Devine Formula</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'pace') {
+      const distanceUnit = unit === 'metric' ? 'km' : 'miles';
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('distance', t('distance'), '', distanceUnit)}
+          ${numberInput('timeMin', `${t('time')} (${t('minutes')})`, '')}
+          ${numberInput('timeSec', `${t('time')} (${t('seconds')})`, '')}
+        </div>
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} Pace`, () => {
+        const distance = requiredNumber($('#distance').value);
+        const minutes = requiredNumber($('#timeMin').value) || 0;
+        const seconds = requiredNumber($('#timeSec').value) || 0;
+        
+        if(!distance || (!minutes && !seconds)) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        const totalMinutes = minutes + (seconds / 60);
+        const paceMinutes = totalMinutes / distance;
+        const paceMins = Math.floor(paceMinutes);
+        const paceSecs = Math.round((paceMinutes - paceMins) * 60);
+        
+        const distUnit = unit === 'metric' ? 'km' : 'mile';
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${paceMins}:${paceSecs.toString().padStart(2, '0')}</div>
+            <div class="text-lg text-gray-600 dark:text-gray-400">per ${distUnit}</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'armybf') {
+      const unit1 = unit === 'metric' ? t('cm') : t('inches');
+      
+      formContainer.innerHTML = `
+        ${radioInput('gender', t('gender'), [
+          {value: 'male', label: t('male'), selected: true},
+          {value: 'female', label: t('female')}
+        ])}
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('height', t('height'), '', unit1)}
+          ${numberInput('waist', t('waist'), '', unit1)}
+        </div>
+        <div id="neckField">
+          ${numberInput('neck', t('neck'), '', unit1)}
+        </div>
+        <div id="hipField" class="hidden">
+          ${numberInput('hip', t('hip'), '', unit1)}
+        </div>
+      `;
+      
+      // Show different fields for gender
+      $all('input[name="gender"]').forEach(radio => {
+        radio.addEventListener('change', () => {
+          const hipField = $('#hipField');
+          const neckField = $('#neckField');
+          if (radio.value === 'female' && radio.checked) {
+            hipField.classList.remove('hidden');
+            neckField.classList.add('hidden');
+          } else {
+            hipField.classList.add('hidden');
+            neckField.classList.remove('hidden');
+          }
+        });
+      });
+      
+      const btn = createButton(`${t('calculateBtn')} Army Body Fat %`, () => {
+        const height = requiredNumber($('#height').value);
+        const waist = requiredNumber($('#waist').value);
+        const gender = $('input[name="gender"]:checked').value;
+        
+        if(!height || !waist) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        let bodyFat;
+        if (gender === 'male') {
+          const neck = requiredNumber($('#neck').value);
+          if (!neck) {
+            alert(t('requiredError'));
+            return;
+          }
+          
+          // Convert to inches if metric
+          let h = height, w = waist, n = neck;
+          if (unit === 'metric') {
+            h = height / 2.54;
+            w = waist / 2.54;
+            n = neck / 2.54;
+          }
+          
+          bodyFat = 86.010 * Math.log10(w - n) - 70.041 * Math.log10(h) + 36.76;
+        } else {
+          const hip = requiredNumber($('#hip').value);
+          if (!hip) {
+            alert(t('requiredError'));
+            return;
+          }
+          
+          // Convert to inches if metric
+          let h = height, w = waist, hip1 = hip;
+          if (unit === 'metric') {
+            h = height / 2.54;
+            w = waist / 2.54;
+            hip1 = hip / 2.54;
+          }
+          
+          bodyFat = 163.205 * Math.log10(w + hip1 - n) - 97.684 * Math.log10(h) - 78.387;
+        }
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${fmt(bodyFat)}%</div>
+            <div class="text-lg text-gray-600 dark:text-gray-400">Body Fat (Army Method)</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'lbm_boer') {
+      const weightUnit = unit === 'metric' ? t('kg') : t('lbs');
+      const heightUnit = unit === 'metric' ? t('cm') : t('inches');
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('weight', t('weight'), '', weightUnit)}
+          ${numberInput('height', t('height'), '', heightUnit)}
+        </div>
+        ${radioInput('gender', t('gender'), [
+          {value: 'male', label: t('male'), selected: true},
+          {value: 'female', label: t('female')}
+        ])}
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} LBM`, () => {
+        const w = requiredNumber($('#weight').value);
+        let h = requiredNumber($('#height').value);
+        const gender = $('input[name="gender"]:checked').value;
+        
+        if(!w || !h) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Convert units if imperial
+        let weight = w;
+        let height = h;
+        if (unit === 'imperial') {
+          weight = w * 0.453592;
+          height = h * 2.54;
+        }
+        
+        // Boer Formula
+        let lbm;
+        if (gender === 'male') {
+          lbm = (0.407 * weight) + (0.267 * height) - 19.2;
+        } else {
+          lbm = (0.252 * weight) + (0.473 * height) - 48.3;
+        }
+        
+        // Convert back if imperial
+        if (unit === 'imperial') {
+          lbm = lbm / 0.453592;
+        }
+        
+        const resultUnit = unit === 'metric' ? t('kg') : t('lbs');
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${fmt(lbm)}</div>
+            <div class="text-lg text-gray-600 dark:text-gray-400">${resultUnit}</div>
+            <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">Lean Body Mass (Boer Formula)</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'healthy') {
+      const heightUnit = unit === 'metric' ? t('cm') : t('inches');
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('height', t('height'), '', heightUnit)}
+        </div>
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} ${t('calculators').find(c=>c.id==='healthy').title}`, () => {
+        let h = requiredNumber($('#height').value);
+        
+        if(!h) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Convert to meters
+        let height = h;
+        if (unit === 'imperial') {
+          height = h * 2.54; // inches to cm
+        }
+        height = height / 100; // cm to meters
+        
+        const minWeight = 18.5 * height * height;
+        const maxWeight = 24.9 * height * height;
+        
+        // Convert back if imperial
+        let min = minWeight, max = maxWeight;
+        const weightUnit = unit === 'metric' ? t('kg') : t('lbs');
+        if (unit === 'imperial') {
+          min = minWeight / 0.453592;
+          max = maxWeight / 0.453592;
+        }
+        
+        showResult(`
+          <div class="text-center space-y-2">
+            <div class="text-2xl font-bold text-green-600">${fmt(min)} - ${fmt(max)}</div>
+            <div class="text-lg text-gray-600 dark:text-gray-400">${weightUnit}</div>
+            <div class="text-sm text-gray-500 dark:text-gray-500">Healthy Weight Range (BMI 18.5-24.9)</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'calburn') {
+      const weightUnit = unit === 'metric' ? t('kg') : t('lbs');
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('weight', t('weight'), '', weightUnit)}
+          ${numberInput('duration', t('duration'), '', t('minutes'))}
+        </div>
+        ${selectInput('exercise', t('exerciseType'), [
+          {value: 'Running (8 km/h)', label: 'Running (8 km/h)', selected: true},
+          {value: 'Walking (5 km/h)', label: 'Walking (5 km/h)'},
+          {value: 'Cycling (moderate)', label: 'Cycling (moderate)'},
+          {value: 'Swimming (moderate)', label: 'Swimming (moderate)'},
+          {value: 'Yoga', label: 'Yoga'},
+          {value: 'Housework', label: 'Housework'},
+          {value: 'Weightlifting', label: 'Weightlifting'},
+          {value: 'Dancing', label: 'Dancing'}
+        ])}
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} ${t('calculators').find(c=>c.id==='calburn').title}`, () => {
+        const w = requiredNumber($('#weight').value);
+        const duration = requiredNumber($('#duration').value);
+        const exercise = $('#exercise').value;
+        
+        if(!w || !duration) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Convert weight to kg if imperial
+        let weight = w;
+        if (unit === 'imperial') {
+          weight = w * 0.453592;
+        }
+        
+        const met = metTable[exercise] || 3.5;
+        const calories = (met * weight * (duration / 60));
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${fmt(calories)}</div>
+            <div class="text-lg text-gray-600 dark:text-gray-400">calories burned</div>
+            <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">${exercise} for ${duration} minutes</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'onerep') {
+      const weightUnit = unit === 'metric' ? t('kg') : t('lbs');
+      
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('weightLifted', t('weightLifted'), '', weightUnit)}
+          ${numberInput('reps', t('reps'), '')}
+        </div>
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} 1RM`, () => {
+        const weight = requiredNumber($('#weightLifted').value);
+        const reps = requiredNumber($('#reps').value);
+        
+        if(!weight || !reps || reps < 1) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        // Epley Formula
+        const oneRM = weight * (1 + reps / 30);
+        
+        const resultUnit = unit === 'metric' ? t('kg') : t('lbs');
+        
+        showResult(`
+          <div class="text-center">
+            <div class="text-4xl font-bold text-indigo-600 mb-2">${fmt(oneRM)}</div>
+            <div class="text-lg text-gray-600 dark:text-gray-400">${resultUnit}</div>
+            <div class="text-sm text-gray-500 dark:text-gray-500 mt-2">One-Rep Max (Epley Formula)</div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+    
+    else if(id === 'thr') {
+      formContainer.innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          ${numberInput('age', t('age'), '', t('years'))}
+        </div>
+      `;
+      
+      const btn = createButton(`${t('calculateBtn')} ${t('calculators').find(c=>c.id==='thr').title}`, () => {
+        const age = requiredNumber($('#age').value);
+        
+        if(!age || age < 1) {
+          alert(t('requiredError'));
+          return;
+        }
+        
+        const maxHR = 220 - age;
+        const zone1Min = Math.round(maxHR * 0.5);
+        const zone1Max = Math.round(maxHR * 0.6);
+        const zone2Min = Math.round(maxHR * 0.6);
+        const zone2Max = Math.round(maxHR * 0.7);
+        const zone3Min = Math.round(maxHR * 0.7);
+        const zone3Max = Math.round(maxHR * 0.85);
+        
+        showResult(`
+          <div class="space-y-3">
+            <div class="text-center mb-4">
+              <div class="text-3xl font-bold text-red-600">${maxHR} bpm</div>
+              <div class="text-sm text-gray-500 dark:text-gray-500">Maximum Heart Rate</div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg text-center">
+                <div class="font-semibold text-blue-600">Fat Burn (50-60%)</div>
+                <div class="text-lg">${zone1Min}-${zone1Max} bpm</div>
+              </div>
+              <div class="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg text-center">
+                <div class="font-semibold text-green-600">Aerobic (60-70%)</div>
+                <div class="text-lg">${zone2Min}-${zone2Max} bpm</div>
+              </div>
+              <div class="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg text-center">
+                <div class="font-semibold text-red-600">Anaerobic (70-85%)</div>
+                <div class="text-lg">${zone3Min}-${zone3Max} bpm</div>
+              </div>
+            </div>
+          </div>
+        `);
+      });
+      
+      formContainer.appendChild(btn);
+    }
+
+    wrap.appendChild(formContainer);
+  }
+
+  /* ===================== Main Render Function ===================== */
+  const content = $('#content');
+  function renderActive(){
+    const calculators = t('calculators');
+    const cal = calculators.find(c=>c.id===currentId) || calculators[0];
+    content.innerHTML = '';
+    
+    const card = document.createElement('div');
+    card.className = 'space-y-6 animate-fade-in';
+    card.innerHTML = `
+      <div class="flex items-start justify-between">
+        <div>
+          <h2 class="text-2xl md:text-3xl font-bold flex items-center gap-3">
+            <span class="text-3xl md:text-4xl">${cal.emoji}</span>
+            <span class="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">${cal.title}</span>
+          </h2>
+          <p class="text-sm md:text-base text-slate-500 dark:text-slate-400 mt-2">${cal.description}</p>
+        </div>
+        <div class="text-xs text-slate-500 dark:text-slate-400 bg-gray-100 dark:bg-gray-700 px-3 py-1 rounded-full">
+          ${t('unitsTitle')}: <strong>${unit === 'metric' ? t('metricLabel') : t('imperialLabel')}</strong>
+        </div>
+      </div>
+      <div id="formWrap"></div>
+      <div id="resultWrap"></div>
+    `;
+    
+    content.appendChild(card);
+    renderForm(cal.id, $('#formWrap'), $('#resultWrap'));
+    
+    // Update active menu item
+    $all('#calculatorList button').forEach(b => {
+      b.classList.remove('bg-gradient-to-r', 'from-indigo-100', 'to-purple-100', 'dark:from-gray-600', 'dark:to-gray-500');
+      if (b.dataset.id === currentId) {
+        b.classList.add('bg-gradient-to-r', 'from-indigo-100', 'to-purple-100', 'dark:from-gray-600', 'dark:to-gray-500');
+      }
+    });
+  }
+
+  /* ===================== Service Worker Registration ===================== */
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('data:application/javascript;base64,c2VsZi5hZGRFdmVudExpc3RlbmVyKCdpbnN0YWxsJywgZXZlbnQgPT4ge2NvbnNvbGUubG9nKCdTVyBpbnN0YWxsZWQnKTt9KTtzZWxmLmFkZEV2ZW50TGlzdGVuZXIoJ2FjdGl2YXRlJywgZXZlbnQgPT4ge2NvbnNvbGUubG9nKCdTVyBhY3RpdmF0ZWQnKTt9KTs=')
+      .then(() => console.log('SW registered'))
+      .catch(() => console.log('SW registration failed'));
+  }
+
+  /* ===================== Event Listeners ===================== */
+  $('#themeToggle').addEventListener('click', toggleTheme);
+  $('#langToggle').addEventListener('click', toggleLanguage);
+  $('#sidebarToggle').addEventListener('click', toggleMobileSidebar);
+  $('#unitMetric').addEventListener('change', () => setUnit('metric'));
+  $('#unitImperial').addEventListener('change', () => setUnit('imperial'));
+
+  // Close mobile sidebar when resizing to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 1024) {
+      closeMobileSidebar();
+      $('#sidebar').classList.remove('hidden');
+    }
+  });
+
+  /* ===================== Initialize App ===================== */
+  initTheme();
+  initLanguage();
+  initMenu();
+  renderActive();
+  
+  console.log('🏃‍♂️ Fitness Calculator App Loaded!');
+  </script>
+</body>
+</html>
