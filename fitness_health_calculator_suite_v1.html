@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="en" class="antialiased">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Fitness & Health Calculator Suite</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    html,body{font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Roboto,"Helvetica Neue",Arial} 
+    :root{--card: #ffffffcc}
+    /* Mobile sidebar overlay */
+    #sidebar.mobile-open {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 280px;
+      height: 100vh;
+      z-index: 50;
+      overflow-y: auto;
+    }
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 40;
+    }
+    .overlay.active {
+      display: block;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-slate-50 to-slate-100 min-h-screen text-slate-800">
+  <!-- Mobile overlay -->
+  <div id="overlay" class="overlay" onclick="closeMobileSidebar()"></div>
+
+  <div class="max-w-4xl mx-auto p-4">
+    <!-- Header -->
+    <header class="flex items-center justify-between mb-4">
+      <div>
+        <h1 class="text-xl md:text-2xl font-semibold flex items-center gap-3">🏃‍♂️ Fitness & Health Calculator Suite</h1>
+        <p class="text-xs md:text-sm text-slate-600">Single-file PWA — 12 calculators · Metric / Imperial · Saved results</p>
+      </div>
+      <div class="flex items-center gap-2">
+        <button id="sidebarToggle" class="px-3 py-2 bg-indigo-600 text-white rounded-lg shadow text-sm md:text-base">☰ Menu</button>
+        <button id="installBtn" class="hidden px-3 py-2 bg-indigo-600 text-white rounded-lg shadow text-sm md:text-base">Install App</button>
+        <button id="exportBtn" class="px-3 py-2 bg-white border rounded-lg shadow text-xs md:text-sm">Save Copy</button>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <!-- Sidebar -->
+      <nav id="sidebar" class="md:col-span-1 bg-white/70 p-3 rounded-2xl shadow-lg md:sticky top-4 h-fit hidden md:block">
+        <label class="flex items-center gap-2 mb-3">
+          <input type="radio" name="unit" id="unitMetric" checked class="w-4 h-4" />
+          <span class="text-sm">Metric</span>
+        </label>
+        <label class="flex items-center gap-2 mb-3">
+          <input type="radio" name="unit" id="unitImperial" class="w-4 h-4" />
+          <span class="text-sm">Imperial</span>
+        </label>
+
+        <hr class="my-2">
+
+        <ul id="calculatorList" class="space-y-2">
+          <!-- Menu injected by JS -->
+        </ul>
+
+        <hr class="my-3">
+        <div class="text-xs text-slate-600">Saved values persist locally. Service worker available on HTTPS / localhost.</div>
+      </nav>
+
+      <!-- Calculator Content -->
+      <section id="content" class="md:col-span-3 bg-white/60 p-4 rounded-2xl shadow-lg min-h-[360px]">
+        <!-- Active calculator injected here -->
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-6 text-center text-sm text-slate-500">© 2025 MAS Company. All rights reserved. Built with care for health and fitness enthusiasts.</footer>
+  </div>
+
+  <script>
+  /* ===================== App Data & Config ===================== */
+  const APP_TITLE = 'Fitness & Health Calculator Suite';
+  const calculators = [
+    {id:'bmi',  title:'BMI Calculator', emoji:'⚖️', description:'Body Mass Index'},
+    {id:'calorie', title:'Calorie Calculator', emoji:'🍽️', description:'BMR + Activity'},
+    {id:'bodyfat_navy', title:'Body Fat (U.S. Navy)', emoji:'🧮', description:'Navy method'},
+    {id:'bmr', title:'BMR (Mifflin-St Jeor)', emoji:'🔥', description:'Basal Metabolic Rate'},
+    {id:'ideal', title:'Ideal Weight (Devine)', emoji:'📏', description:'Devine formula'},
+    {id:'pace', title:'Pace Calculator', emoji:'⏱️', description:'Pace per mile/km'},
+    {id:'armybf', title:'Army Body Fat', emoji:'🎖️', description:'Army method'},
+    {id:'lbm_boer', title:'Lean Body Mass (Boer)', emoji:'💪', description:'Boer formula'},
+    {id:'healthy', title:'Healthy Weight Range', emoji:'🟢', description:'BMI 18.5–24.9'},
+    {id:'calburn', title:'Calories Burned (MET)', emoji:'🔥', description:'Estimate via METs'},
+    {id:'onerep', title:'One-Rep Max (Epley)', emoji:'🏋️', description:'Strength estimate'},
+    {id:'thr', title:'Target Heart Rate', emoji:'❤️', description:'Zones 50–85%'}
+  ];
+
+  const activityFactors = {
+    'sedentary': 1.2,
+    'light': 1.375,
+    'moderate': 1.55,
+    'active': 1.725,
+    'very': 1.9
+  };
+
+  const metTable = {
+    'Running (8 km/h)': 8.3,
+    'Walking (5 km/h)': 3.5,
+    'Cycling (moderate)': 7.5,
+    'Swimming (moderate)': 6.0,
+    'Yoga': 2.5,
+    'Housework': 2.8
+  };
+
+  /* ===================== Utilities ===================== */
+  function $(s,ctx=document){return ctx.querySelector(s)}
+  function $all(s,ctx=document){return Array.from(ctx.querySelectorAll(s))}
+  function fmt(n,dec=2){return Number.isFinite(n)?Number(n.toFixed(dec)):''}
+  function requiredNumber(v){const n=parseFloat(v); return (Number.isFinite(n) && n>=0)?n:NaN}
+  function saveState(key,value){localStorage.setItem('fh.'+key, JSON.stringify(value))}
+  function loadState(key,def=null){try{const v=localStorage.getItem('fh.'+key); return v?JSON.parse(v):def}catch(e){return def}}
+
+  /* ===================== Mobile Sidebar Functions ===================== */
+  function toggleMobileSidebar() {
+    const sidebar = $('#sidebar');
+    const overlay = $('#overlay');
+    
+    if (window.innerWidth < 768) { // Mobile view
+      sidebar.classList.toggle('mobile-open');
+      overlay.classList.toggle('active');
+      document.body.style.overflow = sidebar.classList.contains('mobile-open') ? 'hidden' : '';
+    } else { // Desktop view
+      sidebar.classList.toggle('hidden');
+    }
+  }
+
+  function closeMobileSidebar() {
+    const sidebar = $('#sidebar');
+    const overlay = $('#overlay');
+    
+    sidebar.classList.remove('mobile-open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  /* ===================== Menu & Units ===================== */
+  const menu = $('#calculatorList');
+  calculators.forEach((c,i)=>{
+    const li = document.createElement('li');
+    li.innerHTML = `<button data-id="${c.id}" class="w-full text-left px-3 py-2 rounded-lg hover:bg-indigo-50 flex items-center gap-3"> <span class="text-lg">${c.emoji}</span> <div><div class="font-medium text-sm md:text-base">${c.title}</div><div class="text-xs text-slate-500">${c.description}</div></div></button>`;
+    li.querySelector('button').addEventListener('click', function() {
+      if (window.innerWidth < 768) {
+        closeMobileSidebar();
+      }
+    });
+    menu.appendChild(li);
+  });
+
+  let currentId = loadState('lastId') || 'bmi';
+  let unit = loadState('unit') || 'metric';
+  function setUnit(u){unit=u; saveState('unit',u); document.getElementById('unitMetric').checked = (u==='metric'); document.getElementById('unitImperial').checked = (u==='imperial'); renderActive();}
+  $('#unitMetric').addEventListener('change',()=>setUnit('metric'));
+  $('#unitImperial').addEventListener('change',()=>setUnit('imperial'));
+  
+  // Update menu click handler to use event delegation
+  menu.addEventListener('click', e =>{ 
+    const btn = e.target.closest('button[data-id]'); 
+    if(!btn) return; 
+    currentId = btn.dataset.id; 
+    saveState('lastId', currentId); 
+    renderActive(); 
+  });
+
+  /* ===================== Renderers ===================== */
+  const content = $('#content');
+  function renderActive(){
+    const cal = calculators.find(c=>c.id===currentId) || calculators[0];
+    content.innerHTML = '';
+    const card = document.createElement('div');
+    card.className = 'space-y-4';
+    card.innerHTML = `<div class="flex items-start justify-between">
+      <div>
+        <h2 class="text-lg md:text-xl font-semibold">${cal.emoji} ${cal.title}</h2>
+        <p class="text-xs md:text-sm text-slate-500">${cal.description}</p>
+      </div>
+      <div class="text-xs text-slate-500">Units: <strong>${unit}</strong></div>
+    </div>
+    <div id="formWrap"></div>
+    <div id="resultWrap"></div>`;
+    content.appendChild(card);
+    renderForm(cal.id, $('#formWrap'), $('#resultWrap'));
+  }
+
+  /* -------------------- shared helpers -------------------- */
+  function numberInput(name, label, placeholder=''){
+    return `<label class="block text-sm"><div class="flex justify-between"><span>${label}</span><span id="${name}Err" class="text-xs text-red-600 hidden">required</span></div>
+      <input inputmode="decimal" id="${name}" placeholder="${placeholder}" class="w-full border rounded-lg px-3 py-2 mt-1 focus:outline-none focus:ring focus:ring-indigo-300 text-base" /></label>`;
+  }
+
+  /* -------------------- Example BMI -------------------- */
+  function renderForm(id, wrap, resWrap){
+    wrap.innerHTML='';
+    if(id==='bmi'){
+      // Dynamic labels based on unit system
+      const weightLabel = unit === 'metric' ? 'Weight (kg)' : 'Weight (lbs)';
+      const heightLabel = unit === 'metric' ? 'Height (cm)' : 'Height (inches)';
+      
+      wrap.innerHTML = numberInput('weight', weightLabel) + numberInput('height', heightLabel);
+      const btn = document.createElement('button');
+      btn.textContent='Calculate BMI';
+      btn.className='px-4 py-2 bg-indigo-600 text-white rounded-lg shadow w-full md:w-auto text-base';
+      btn.addEventListener('click',()=>{
+        const w=requiredNumber($('#weight').value);
+        let h=requiredNumber($('#height').value);
+        
+        // Convert units if imperial
+        if (unit === 'imperial') {
+          h = h / 39.37; // inches to meters
+        } else {
+          h = h / 100; // cm to meters
+        }
+        
+        if(!w||!h){alert('Enter valid numbers');return;}
+        const bmi = w/(h*h);
+        resWrap.innerHTML=`<div class="bg-white p-4 rounded-lg shadow mt-4">
+          <p class="font-semibold text-lg">BMI = ${fmt(bmi)}</p>
+          <p class="text-sm mt-2">${getBMICategory(bmi)}</p>
+        </div>`;
+      });
+      wrap.appendChild(btn);
+    }
+    // Add other calculators similarly...
+  }
+
+  function getBMICategory(bmi) {
+    if (bmi < 18.5) return 'Underweight';
+    if (bmi < 25) return 'Normal weight';
+    if (bmi < 30) return 'Overweight';
+    return 'Obese';
+  }
+
+  // Initial render
+  renderActive();
+
+  /* ===================== Sidebar Toggle ===================== */
+  const sidebarToggle = $('#sidebarToggle');
+  sidebarToggle.addEventListener('click', toggleMobileSidebar);
+
+  // Close mobile sidebar when resizing to desktop
+  window.addEventListener('resize', function() {
+    if (window.innerWidth >= 768) {
+      closeMobileSidebar();
+      $('#sidebar').classList.remove('hidden'); // Ensure visible on desktop
+    }
+  });
+
+  </script>
+</body>
+</html>

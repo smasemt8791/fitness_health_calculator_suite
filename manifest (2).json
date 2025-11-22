@@ -1,0 +1,18 @@
+{
+  "name": "Fitness &amp; Health Calculator",
+  "short_name": "FitnessCalc",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f1f5f9",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53M3QvMjAwMC9zdmciIHdpZHRoPSIxMjAiIGhlaWdodD0iMTIwIiB2aWV3Qm94PSIwIDAgMTIwIDEyMCI+PHJlY3Qgd2lkdGg9IjEyMCIgaGVpZ2h0PSIxMjAiIGZpbGw9IiM0ZjQ2ZTUiLz48dGV4dCB4PSI2MCIgeT0iNDAiIGZpbGw9IiNmZmYiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaTplPSIyNCB2b21kIGZvbnQtd2VpZ2h0PSI2MDAiPkZpdG5lc3M8L3RleHQ+PC9zdmc+"
+    },
+    {
+      "src": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0uY29tIHdpZHRoPSI1MTIiIGhlaWdodD0iNTEyIiB2aWV3Qm94PSIwIDAgNTEyIDUxMiI+PHJlY3Qgd2lkdGg9IjUxMiIgaGVpZ2h0PSI1MTIiIGZpbGw9IiM0ZjQ2ZTUiLz48dGV4dCB4PSIyNTYiIHk9IjE2MCIgZmlsbD0iY3VycmVudENvbG9yIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDgiIGZvbnQtd2VpZ2h0PSI2MDAiPkZpdG5lc3M8L3RleHQ+PC9zdmc+",
+      "sizes": "512x512",
+      "type": "image/svg+cml"
+    }
+  ]
+}
