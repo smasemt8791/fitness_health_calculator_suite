@@ -85,4 +85,4 @@ https://smasemt8791.github.io/fitness_health_calculator_suite/
 
 For Developers
 No build step required! Just open index.html in any modern browser.
-Install it now — works and feels exactly like a native app!
+Install it now - works and feels exactly like a native app!
