@@ -36,7 +36,9 @@ Local Storage لحفظ البيانات
 أيقونات مخصصة وملف manifest كامل
 
 رابط التطبيق المباشر
+
 https://smasemt8791.github.io/fitness_health_calculator_suite/
+
 للمطورين – كيفية التشغيل محليًا
 التطبيق لا يحتاج أي بناء أو تثبيت إضافي، فقط افتح الملف index.html في أي متصفح حديث.
 جرب التطبيق الآن وأضفه إلى شاشتك الرئيسية – يعمل مثل أي تطبيق أصلي تمامًا!
@@ -78,7 +80,9 @@ Fully responsive Mobile-First design
 Custom icons + complete web manifest
 
 Live App
+
 https://smasemt8791.github.io/fitness_health_calculator_suite/
+
 For Developers
 No build step required! Just open index.html in any modern browser.
 Install it now — works and feels exactly like a native app!
